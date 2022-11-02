@@ -50,11 +50,15 @@ bottomDropdown.addEventListener('change', (e) => {
     displayStats();
 });
 
-catchphraseButton.addEventListener('click', () => {
+catchphraseButton.addEventListener('click', (e) => {
     // get the value of the catchphrase input
+    const phrase = catchphraseInput.value;
     // push the new catchphrase to the catchphrase array in state
+    catchphrases.push(phrase);
     // clear out the form input's value so it's empty to the user
+    catchphraseInput.value = '';
     // update the dom to show the new catchphrases (refactor to/call displayCatchphrases to do this work)
+    displayCatchphrases();
 });
 
 function displayStats() {
@@ -70,8 +74,16 @@ function displayStats() {
 
 function displayCatchphrases() {
     // clear out the DOM for the currently displayed catchphrases
+    catchphrasesEl.textContent = '';
     // loop through each catchphrase in state
-    // and for each catchphrase
-    // create an HTML element with the catchphrase as its text content
-    // and append that HTML element to the cleared-out DOM
+    for (let phrase of catchphrases) {
+        // and for each catchphrase
+        const catchphraseLineDisplay = document.createElement('h4');
+
+        // create an HTML element with the catchphrase as its text content
+        catchphraseLineDisplay.textContent = phrase;
+
+        // and append that HTML element to the cleared-out DOM
+        catchphrasesEl.append(catchphraseLineDisplay);
+    }
 }
